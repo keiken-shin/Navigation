@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/8aa13c88ab.js"></script>
+
+    <title>Resolve</title>
+</head>
+<body>
+    <!-- noscript -->
+    <noscript>Your browser's Javascript has been disabled please enable it.</noscript>
+
+    <header class="container-fluid header">
+        <div class="logo">
+            <h1 class="logo-title">RESOLVE.</h1>
+        </div>
+        <nav>
+            <svg class="ham hamRotate hammy" viewBox="0 0 100 100" width="50" onclick="this.classList.toggle('active')">
+                <path
+                        class="line top"
+                        d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -20" />
+                <path
+                        class="line middle"
+                        d="m 70,50 h -40" />
+                <path
+                        class="line bottom"
+                        d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20" />
+            </svg>
+        </nav>
+    </header>
+
+    <div class="container-fluid nav-blob">
+        <nav class="navbar">
+            <a href="" class="nav-link"> 
+                <div class="dot-container"></div>
+                <p class="label">Home</p>
+            </a> 
+    
+            <a href="" class="nav-link">
+                <div class="dot-container"></div>
+                <p class="label">Raised</p> 
+            </a> 
+        
+            <a href="" class="nav-link">
+                <div class="dot-container"></div>  
+                <p class="label">Recieved</p>
+            </a> 
+    
+            <a href="" class="nav-link">
+                <div class="dot-container"></div> 
+                <p class="label">Notification </p>
+            </a> 
+    
+            <a href="" class="nav-link">
+                <div class="dot-container"></div> 
+                <p class="label">Logout</p>
+            </a> 
+        </nav>
+    </div>
+
+    <main class="container main">
+        <form action="" method="POST" class="form" enctype="multipart/form-data" id="escalate">
+            <div class="heading">
+                <h1>Describe the issue</h1>
+            </div>
+
+            <section class="form__group1">
+                <div class="form--elem">
+                    <label for="">Which team has to resolve the issue?</label>
+                    <select name="team" id="teams">
+                        <option value="">--select team--</option>
+                    </select>
+                </div>
+                <div class="form--elem">
+                    <label for="">Have you raised this issue to that team already?</label>
+                    <select name="already" id="already" class="" required="true">
+                        <option value="">--make a choice--</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="urgent">No-but the issue needs immediate attention</option>
+                    </select>
+                </div>
+                <div class="form--elem notUrgent">
+                    <label for="">When did you raise the issue?</label>
+                    <input type="date" name="prevRaiseDate" id="prevDate" required="true">
+                </div>
+                <div class="form--elem notUrgent">
+                    <label for="">Attach relevant email via which you raised the issue?</label>
+                    <div class="form-group">
+                        <input type="file" name="img[] file__two" class="file">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-paperclip"></i></span>
+                            </div>
+                            <input type="text" class="form-control" disabled placeholder="Upload File" aria-label="Upload File" aria-describedby="basic-addon1">
+                            <div class="input-group-append">
+                                <button type="button" class="browse input-group-text btn btn-primary" id="basic-addon2"><i class="fas fa-search"></i> &nbsp;Browse</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form__group2">
+                <div class="form--elem">
+                    <label for="">Who does the issue impact?</label>
+                    <select name="issues" id="issueImpact" class="dis" onchange="info()" required>
+                        <option value="">--select issue--</option>
+                    </select>
+                </div>
+                <div class="form--elem">
+                    <label for="">Select Client <span style="font-weight: 500">(if applicable)</span></label>
+                    <select name="client" id="client" class="">
+                        <option value="">--select client--</option>
+                    </select>
+                </div>
+                <div class="form--elem">
+                    <label for="">How many people does the issue impact?</label>
+                    <select name="impact_extent" id="extent" class="dis" required>
+                        <option value="">--select--</option>
+                    </select>
+                </div>
+                <div class="form--elem">
+                    <label for="">Attach a relevant document <span style="font-weight: 500">(if any)</span></label>
+                    <div class="form-group">
+                        <input type="file" name="img[] file__one" class="file">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-paperclip"></i></span>
+                            </div>
+                            <input type="text" class="form-control" disabled placeholder="Upload File" aria-label="Upload File" aria-describedby="basic-addon1">
+                            <div class="input-group-append">
+                                <button type="button" class="browse input-group-text btn btn-primary" id="basic-addon2"><i class="fas fa-search"></i> &nbsp;Browse</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./js/ham.js"></script>
+
+    <!-- Browse Script -->
+    <script>
+       $(document).on("click", ".browse", function() {
+        var file = $(this)
+            .parent()
+            .parent()
+            .parent()
+            .find(".file");
+        file.trigger("click");
+        });
+        $(document).on("change", ".file", function() {
+        $(this)
+            .parent()
+            .find(".form-control")
+            .val(
+            $(this)
+                .val()
+                .replace(/C:\\fakepath\\/i, "")
+            );
+        });
+    </script>
+</body>
+</html>

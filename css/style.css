@@ -1,0 +1,151 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css?family=Michroma&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900&display=swap');
+
+html,
+body{
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+}
+
+/*--- Header 
+-----------------------------------------*/
+
+.header{
+    position: fixed;
+    padding: .5em 2em;
+    display: flex;
+    align-items: center;
+    z-index: 11;
+}
+
+/* Logo */
+.logo{
+    flex: 1;
+}
+
+.logo-title{
+    font-family: 'Michroma', sans-serif;
+    color: #000;
+    -webkit-text-stroke: 1px;
+    font-size: 1.5rem;
+    line-height: calc(1.5 * 1.61);
+    margin-bottom: 0rem;
+}
+
+
+/* Hamburger Morph */
+.ham {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.hamRotate.active {
+    transform: rotate(45deg);
+}
+
+.line {
+    fill:none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke:#000;
+    stroke-width:5.5;
+    stroke-linecap:round;
+}
+
+.hammy .top {
+    stroke-dasharray: 40 121;
+}
+.hammy .bottom {
+    stroke-dasharray: 40 121;
+}
+.hammy.active .top {
+    stroke-dashoffset: -68px;
+}
+.hammy.active .bottom {
+    stroke-dashoffset: -68px;
+}
+
+.hammy.active .line{
+    stroke: #fff;
+}
+
+.nav-blob{
+    position: absolute;
+    z-index: 10;
+    top: -90vh;
+    left: 0;
+    height: 100vh;
+    background-color: #fff;
+    color: #fff;
+    padding: 5rem;
+    display: flex;
+}
+
+.navbar{
+    width: 100%;
+    /* display: grid; */
+}
+
+.nav-link{
+    color: #fff;
+    font-size: 2rem;
+    font-family: 'Nunito', sans-serif;
+    position: relative;
+}
+
+.nav-link:hover{
+    color: #fff;
+    transition: all 2s ease-in-out;
+}
+
+.nav-link:hover .dot-container{
+    position: absolute;
+    top: 22px;
+    width: 20px;
+    height: 20px;
+    background: url('../images/menu_blob_init.png') left center;
+    animation: navime .2s steps(9) ;
+}
+
+.nav-link:hover .label{
+    position: relative;
+    left: 30px;
+    transition: all .3s ease-in-out;
+}
+
+@keyframes navime{
+    from{
+        transform-origin: 50% 50% 0px;
+        opacity: 0;
+        transform: matrix(1, 0, 0, 1, -1, -20);
+        transition: all .2s ease-in-out;
+    }
+    to{
+        opacity: 1;
+        transform: matrix(1, 0, 0, 1, -1, 20);
+        transition: all .2s ease-in-out;
+    }
+}
+
+
+/*--- Header End
+-----------------------------------------*/
+
+
+
+/*--- Main
+-----------------------------------------*/
+
+.main{
+    padding-top: 10vh;
+}
+
+.file {
+    visibility: hidden;
+    position: absolute;
+  }
