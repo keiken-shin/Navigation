@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.7/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="./css/uikit.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <title>Resolve</title>
+</head>
+<body>
+    <!-- noscript -->
+    <noscript>Your browser's Javascript has been disabled please enable it.</noscript>
+
+    <header class="uk-container uk-width-1-1 header uk-background-muted" uk-navbar>
+        <div class="logo">
+            <h1 class="logo-title">RESOLVE.</h1>
+        </div>
+        <nav>
+            <svg class="ham hamRotate hammy" viewBox="0 0 100 100" width="50" onclick="this.classList.toggle('active')">
+                <path
+                        class="line top"
+                        d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -20" />
+                <path
+                        class="line middle"
+                        d="m 70,50 h -40" />
+                <path
+                        class="line bottom"
+                        d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20" />
+            </svg>
+        </nav>
+    </header>
+
+    <div class="uk-container uk-width-1-1 nav-blob">
+        <nav class="navbar">
+            <a href="" class="nav-link "> 
+                <div class="dot-container"></div>
+                <p class="label">Home</p>
+            </a> 
+    
+            <a href="" class="nav-link">
+                <div class="dot-container"></div>
+                <p class="label">Raised</p> 
+            </a> 
+        
+            <a href="" class="nav-link">
+                <div class="dot-container"></div>  
+                <p class="label">Recieved</p>
+            </a> 
+    
+            <a href="" class="nav-link">
+                <div class="dot-container"></div> 
+                <p class="label">Notification </p>
+            </a> 
+    
+            <a href="" class="nav-link">
+                <div class="dot-container"></div> 
+                <p class="label">Logout</p>
+            </a> 
+        </nav>
+    </div>
+
+    <main class="tm-main uk-section uk-section-default main uk-background-default">
+        <div class="uk-container uk-container-large uk-position-relative">
+            <form action="" method="POST" class="form" enctype="multipart/form-data" id="escalate">
+                <legend class="uk-legend uk-margin-bottom">Describe the issue</legend>
+                
+                <fieldset class=" uk-grid uk-card uk-card uk-card-default uk-card-body my--display" data-class="form-fieldset" uk-grid>
+
+                    <div class="uk-margin">
+                        <label for="" class="uk-form-label">Which team has to resolve the issue?</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" name="team" id="teams" required="true">
+                                <option>--select team--</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="uk-margin">
+                        <label for="" class="uk-form-label">Have you raised this issue to that team already?</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" name="already" id="already" required="true">
+                                <option>--make a choice--</option>
+                            </select>
+                        </div>
+                    </div> 
+
+                    <div class="uk-margin notUrgent">
+                        <label for="" class="uk-form-label">When did you raise the issue?</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="date" name="prevRaiseDate" id="prevDate" required="true">
+                        </div>
+                    </div> 
+            
+                    <div class="uk-margin notUrgent" uk-margin>
+                        <div uk-form-custom="target: true">
+                            <label for="" class="uk-form-label">Attach relevant email via which you raised the issue?</label>
+                            <input class="file" type="file" name="file__two">
+                            <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: link" style="top:25px;"></a>
+                            <input id="uploadFile2" class="uk-input elem-disabled" name="" type="text" placeholder="Select file..." disabled>
+                        </div>
+                    </div>
+                
+                </fieldset> 
+
+                <fieldset class=" uk-grid uk-card uk-card uk-card-default uk-card-body my--display" data-class="form-fieldset">
+
+                    <div class="uk-margin">
+                        <label for="" class="uk-form-label">Who does the issue impact?</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select dis" name="issues" id="issueImpact" required="true">
+                                <option>--select issue--</option>
+                                {% for category in impact_categories %}
+                                <option value="{{ category }}">{{ category }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label for="" class="uk-form-label">Who does the issue impact?</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select dis" name="issues" id="issueImpact" required="true">
+                                <option>--select issue--</option>
+                                {% for category in impact_categories %}
+                                <option value="{{ category }}">{{ category }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label for="" class="uk-form-label">Select Client</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select dis" name="client" id="client">
+                                <option>--select client--</option>
+                                {% for client in client_names %}
+                                <option value="{{ client }}">{{ client }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label for="" class="uk-form-label">How many people does the issue impact?</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select dis" name="client" id="client">
+                                {% for extent in impact_extent %}
+                                    <option value="{{ extent }}">{{ extent }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin" uk-margin>
+                        <div uk-form-custom="target: true">
+                            <label for="" class="uk-form-label">Attach a relevant document <span>(if any)</span></label>
+                            <input class="upload" type="file" name="file__one" id="uploadBtn">
+                            <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: link" style="top:25px;"></a>
+                            <input id="uploadFile" class="uk-input elem-disabled" name="" type="text" placeholder="Select file..." disabled>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label for="" class="uk-form-label">Add Emails to Notify the issue (For multiple emails use comma)</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="email" name="tags[]" list="emails" multiple>
+                            <datalist id="emails">
+                                {% for i in email_list %}
+                                <option value="{{ i.user_email }}">{{ i.user_name }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label for="" class="uk-form-label">Describe the issue</label>
+                        <div class="uk-form-controls">
+                            <textarea class="uk-textarea" name="desc" id="description" rows="5" placeholder="Hey, your issue description please" required=true></textarea>
+                        </div>
+                    </div>
+
+                </fieldset>            
+            </form>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.7/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.7/dist/js/uikit-icons.min.js"></script>
+
+    <!-- Scripts -->
+    <script src="./js/ham.js"></script>
+
+</body>
+</html>
+
+

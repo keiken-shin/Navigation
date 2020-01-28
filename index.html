@@ -69,89 +69,119 @@
     </div>
 
     <main class="container main">
-        <form action="" method="POST" class="form" enctype="multipart/form-data" id="escalate">
-            <div class="heading">
-                <h1>Describe the issue</h1>
-            </div>
+        <form action="" method="POST" enctype="multipart/form-data" id="escalate">{% csrf_token %}
 
-            <section class="form__group1">
-                <div class="form--elem">
+            <section class="form__head">
+                <div class="heading">
+                    <h1>Describe the issue</h1>
+                </div>
+            </section>
+
+            <section class="form__firstGroup">
+                <div class="fieldDiv">
                     <label for="">Which team has to resolve the issue?</label>
-                    <select name="team" id="teams">
-                        <option value="">--select team--</option>
+                    <select name="team" id="teams" class="" required="true">
+                        <option value="">--select--</option>
+                        {% for team in teams %}
+                            <option value="{{ team }}">{{ team }}</option>
+                        {% endfor %}
                     </select>
                 </div>
-                <div class="form--elem">
+                <div class="fieldDiv">
                     <label for="">Have you raised this issue to that team already?</label>
                     <select name="already" id="already" class="" required="true">
-                        <option value="">--make a choice--</option>
+                        <option value="">--select--</option>
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
                         <option value="urgent">No-but the issue needs immediate attention</option>
+                        <option value="Audit Query">Audit Query</option>
                     </select>
                 </div>
-                <div class="form--elem notUrgent">
+                <div class="fieldDiv notUrgent">
                     <label for="">When did you raise the issue?</label>
                     <input type="date" name="prevRaiseDate" id="prevDate" required="true">
                 </div>
-                <div class="form--elem notUrgent">
+                <div class="fieldDiv notUrgent">
                     <label for="">Attach relevant email via which you raised the issue?</label>
-                    <div class="form-group">
-                        <input type="file" name="img[] file__two" class="file">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-paperclip"></i></span>
-                            </div>
-                            <input type="text" class="form-control" disabled placeholder="Upload File" aria-label="Upload File" aria-describedby="basic-addon1">
-                            <div class="input-group-append">
-                                <button type="button" class="browse input-group-text btn btn-primary" id="basic-addon2"><i class="fas fa-search"></i> &nbsp;Browse</button>
-                            </div>
+                    <div class="attachDiv">
+                        <input id="uploadFile2" placeholder="No file choosen" disabled="disabled" />
+                        <div class="fileUpload">
+                            <span>Choose File</span>
+                            <input id="uploadBtn2" type="file"  class="upload" name="file__two" required="true"/>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="form__group2">
-                <div class="form--elem">
+            <section class="form__secondGroup">
+                <div class="fieldDiv">
                     <label for="">Who does the issue impact?</label>
                     <select name="issues" id="issueImpact" class="dis" onchange="info()" required>
                         <option value="">--select issue--</option>
+                        {% for category in impact_categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
                     </select>
                 </div>
-                <div class="form--elem">
+
+                <div class="fieldDiv">
                     <label for="">Select Client <span style="font-weight: 500">(if applicable)</span></label>
                     <select name="client" id="client" class="">
                         <option value="">--select client--</option>
+                        {% for client in client_names %}
+                            <option value="{{ client }}">{{ client }}</option>
+                        {% endfor %}
                     </select>
                 </div>
-                <div class="form--elem">
+
+                <div class="fieldDiv">
                     <label for="">How many people does the issue impact?</label>
                     <select name="impact_extent" id="extent" class="dis" required>
                         <option value="">--select--</option>
+                        {% for extent in impact_extent %}
+                            <option value="{{ extent }}">{{ extent }}</option>
+                        {% endfor %}
                     </select>
                 </div>
-                <div class="form--elem">
+
+                <div class="attach fieldDiv">
                     <label for="">Attach a relevant document <span style="font-weight: 500">(if any)</span></label>
-                    <div class="form-group">
-                        <input type="file" name="img[] file__one" class="file">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-paperclip"></i></span>
-                            </div>
-                            <input type="text" class="form-control" disabled placeholder="Upload File" aria-label="Upload File" aria-describedby="basic-addon1">
-                            <div class="input-group-append">
-                                <button type="button" class="browse input-group-text btn btn-primary" id="basic-addon2"><i class="fas fa-search"></i> &nbsp;Browse</button>
-                            </div>
+                    <div class="attachDiv">
+                        <input id="uploadFile" placeholder="No file choosen" disabled="disabled" />
+                        <div class="fileUpload">
+                            <span>Choose File</span>
+                            <input id="uploadBtn" type="file" class="upload" name="file__one"  />
                         </div>
                     </div>
+                </div>
+
+            </section>
+            <section class="form__thirdGroup">
+                <div class="tags fieldDiv">
+                    <label for="">Add Emails to Notify the issue</label>
+                    <!-- <input name='basic' value='' class='textTag'> -->
+                    <div id="output"></div>
+                    <select data-placeholder="Choose tags ..." name="tags[]" multiple class="chosen-select dis" >
+                        {% for i in email_list %}
+                            <option value="{{ i.user_email }}">{{ i.user_name }}( {{ i.user_email }} )</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="desc fieldDiv">
+                    <label for="">Describe the issue</label>
+                    <textarea name="desc" id="description" class="dis" required></textarea>
+                    <p id="validator"></p>
                 </div>
             </section>
         </form>
     </main>
 
-    <!-- Scripts -->
+    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- Scripts -->
     <script src="./js/ham.js"></script>
 
     <!-- Browse Script -->
@@ -177,3 +207,5 @@
     </script>
 </body>
 </html>
+
+

@@ -13,7 +13,7 @@ body{
 
 .header{
     position: fixed;
-    padding: .5em 2em;
+    padding: 0em 2em;
     display: flex;
     align-items: center;
     z-index: 11;
@@ -84,16 +84,16 @@ body{
     color: #fff;
     padding: 5rem;
     display: flex;
+    align-items: center;
 }
 
 .navbar{
     width: 100%;
-    /* display: grid; */
 }
 
 .nav-link{
     color: #fff;
-    font-size: 2rem;
+    font-size: 4rem;
     font-family: 'Nunito', sans-serif;
     position: relative;
 }
@@ -101,15 +101,20 @@ body{
 .nav-link:hover{
     color: #fff;
     transition: all 2s ease-in-out;
+    text-decoration: none;
 }
 
 .nav-link:hover .dot-container{
     position: absolute;
-    top: 22px;
+    top: 42px;
     width: 20px;
     height: 20px;
     background: url('../images/menu_blob_init.png') left center;
     animation: navime .2s steps(9) ;
+}
+
+.nav-link:first-of-type:hover .dot-container{
+    top: 62px;
 }
 
 .nav-link:hover .label{
@@ -143,9 +148,31 @@ body{
 
 .main{
     padding-top: 10vh;
+    z-index: -100;
 }
 
 .file {
     visibility: hidden;
     position: absolute;
-  }
+}
+
+.uk--display{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/*--- Media Query
+-----------------------------------------*/
+@media (max-width: 1230px){
+    .nav-link{
+        font-size: 2rem;
+    }
+
+    .nav-link:hover .dot-container{
+        top: 16px;
+    }
+
+    .nav-link:first-of-type:hover .dot-container{
+        top: 34px;
+    }
+}
